@@ -5,7 +5,7 @@ CREATE TABLE Authors (
     Name VARCHAR(100) NOT NULL,
     Biography VARCHAR(100)
 );
-   INSERT INTO Members(AutherID,Name, Biography,)
+   INSERT INTO Members(AutherID,Name, Biography)
    VALUES(201,"kamban","aaa");
    VALUES(202,"sekkilar","bbb");
    VALUES(203,"Charu Niveditha","ccc");
@@ -37,7 +37,7 @@ create TABLE Books(
        FOREIGN KEY (GenreID) REFERENCES Genres(GenreID)
 );
 
-  INSERT INTO Books (BookID,Title, AuthorID,GenreID,PublicationYear,Price,)
+  INSERT INTO Books (BookID,Title, AuthorID,GenreID,PublicationYear,Price)
   VALUES(1,"Ramavatharam",201,10,2000,199);
   VALUES(2,"Periyapuranam",202,20,2001,299);
   VALUES(3,"Zero degree",203,30,2002,399);
