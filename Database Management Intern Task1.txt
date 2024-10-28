@@ -1,0 +1,111 @@
+AUTHORS TABLE:
+
+CREATE TABLE Authors (
+    AuthorID INT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Biography VARCHAR(100)
+);
+   INSERT INTO Members(AutherID,Name, Biography,)
+   VALUES(201,"kamban","aaa");
+   VALUES(202,"sekkilar","bbb");
+   VALUES(203,"Charu Niveditha","ccc");
+   VALUES(203,"Kamil Zvelebil","ddd");
+
+GENRES TABLE:
+
+CREATE TABLE Genres (
+    GenreID INT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL
+);
+
+INSERT INTO( GenreID,Name)
+VALUES(10,"ZZZ");
+VALUES(20,"YYY");
+VALUES(30,"TTT");
+VALUES(40,"SSS");
+
+BOOKS TABLE:
+
+create TABLE Books(
+       BookID int,
+       Title[varchar(255)],
+       AuthorID[int],
+       GenreID[int],
+       PublishYear[int],
+       Price[decimal(10, 2)],
+       FOREIGN KEY (AuthorID) REFERENCES Authors(AuthorID),
+       FOREIGN KEY (GenreID) REFERENCES Genres(GenreID)
+);
+
+  INSERT INTO Books (BookID,Title, AuthorID,GenreID,PublicationYear,Price,)
+  VALUES(1,"Ramavatharam",201,10,2000,199);
+  VALUES(2,"Periyapuranam",202,20,2001,299);
+  VALUES(3,"Zero degree",203,30,2002,399);
+  VALUES(4,"Valayapathi",204,40,2003,250);
+
+MEMBERS TABLE:
+
+CREATE TABLE Members (
+    MemberID INT ,
+    FirstName VARCHAR(100) NOT NULL,
+    LastName VARCHAR(100) NOT NULL,
+    Email VARCHAR(255) UNIQUE,
+    Phone VARCHAR(15)
+);
+
+   INSERT INTO Members(MemberID,FirstName,LastName,Email,Phone)
+   VALUES(100,"ABC","CBA","abc@gmail.com",9000000001);
+   VALUES(101,"DEF","FED","def@gmail.com",9000000002);
+   VALUES(103,"GHI","IHG","ghi@gmail.com",9000000003);
+   VALUES(104,"JKL","LJK","jkl@gmail.com",9000000004);
+
+   
+LOANS TABLE:
+
+CREATE TABLE Loans (
+    LoanID INT PRIMARY KEY,
+    MemberID INT,
+    BookID INT,
+    LoanDate DATE NOT NULL,
+    DueDate DATE NOT NULL,
+    ReturnDate DATE,
+    FOREIGN KEY (MemberID) REFERENCES Members(MemberID),
+    FOREIGN KEY (BookID) REFERENCES Books(BookID)
+);
+INSERT INTO Loans (LoanID,MemberID,BookID,LoanDate,DueDate,ReturnDate)
+VALUES (501,100,1,'2024-01-15','2024-01-15','2024-01-15');
+VALUES(502,101,2,'2024-01-15','2024-01-15','2024-01-15');
+VALUES(503,102,3,'2024-01-15','2024-01-15','2024-01-15');
+VALUES(504,103,4,'2024-01-15','2024-01-15','2024-01-15');
+
+
+1) SELECT * 
+   FROM Loans,Books;
+
+2) UPDATE Books 
+   SET Title="Tholkappiyam"
+   WHERE BookID=2;
+
+3) SELECT Loans.LoanID, Books.Title, Loans.LoanDate, Loans.ReturnDate 
+   FROM Loans 
+   JOIN Books ON Loans.BookID = Books.BookID
+   WHERE Loans.MemberID = 1; 
+
+4) SELECT Loans.LoanID, Members.Name, Books.Title, Loans.DueDate
+   FROM Loans 
+   JOIN Members ON Loans.MemberID = Members.MemberID
+   JOIN Books ON Loans.BookID = Books.BookID
+   WHERE Loans.DueDate < CURRENT_DATE AND Loans.ReturnDate IS NULL;
+
+
+5)SELECT COUNT(*) AS TotalLoans FROM Loans;
+
+
+6)UPDATE Books 
+SET AvailableCopies = AvailableCopies - 1 
+WHERE BookID = 1;
+
+
+7)SELECT * FROM Members;
+  
+    
